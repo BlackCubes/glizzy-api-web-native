@@ -14,11 +14,11 @@ def random_string_generator(
 
 def unique_slug_generator(instance, new_slug=None):
     """
-    Assumes the instance has a model with ``slug`` and ``name`` fields.
-
     Returns a unique slug from the model's ``name`` field if the ``slug``
     query exists in the DB, or the newly created ``slug`` that slugifies the
     model's name if the ``slug`` query does not exist in the DB.
+
+    NOTE: Assumes the instance has a model with ``slug`` and ``name`` fields.
     """
     if new_slug is not None:
         slug = new_slug
