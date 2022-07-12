@@ -13,13 +13,13 @@ def main():
     """Run administrative tasks."""
     load_dotenv()
 
-    DJANGO_SETTINGS_MODULE = 'core.settings.dev'
+    DJANGO_SETTINGS_MODULE = "core.settings.dev"
 
-    if os.getenv('IN_PRODUCTION') == 'yes':
-        DJANGO_SETTINGS_MODULE = 'core.settings.production'
+    if os.getenv("IN_PRODUCTION") == "yes":
+        DJANGO_SETTINGS_MODULE = "core.settings.production"
 
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', DJANGO_SETTINGS_MODULE)
-    
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", DJANGO_SETTINGS_MODULE)
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -28,9 +28,9 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    
+
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
