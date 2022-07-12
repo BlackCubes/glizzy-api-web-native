@@ -1,5 +1,6 @@
 import random
 import string
+from django.http import JsonResponse
 from django.utils.text import slugify
 
 
@@ -39,3 +40,27 @@ def slug_generator(instance, new_slug=None):
         return slug_generator(instance, new_slug=unique_slug)
 
     return slug
+
+
+def error_404(request, exception):
+    response = JsonResponse(
+        data={
+            "status_code": 404,
+            "status": "fail",
+            "message": "The requested URL was not found.",
+        }
+    )
+
+    return response
+
+
+def error_500(request):
+    response = JsonResponse(
+        data={
+            "status_code": 500,
+            "status": "error",
+            "message": "Sorry, a technical error has occured.",
+        }
+    )
+
+    return response
