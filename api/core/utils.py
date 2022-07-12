@@ -64,3 +64,22 @@ def error_500(request):
     )
 
     return response
+
+
+def final_success_response(request, response):
+    if not response.exception:
+        response.data = {
+            "status_code": response.status_code,
+            "status": "success",
+            "data": response.data,
+        }
+
+        if (
+            "results" in response.data["data"]
+            and "meta_data" in response.data["data"]
+        ):
+            pagination_data = response.data["data"].pop("results")
+            pagination_meta_data = response.data["data"].pop("meta_data")
+
+            response.data["data"] = pagination_data
+            response.data["meta_data"] = pagination_meta_data
