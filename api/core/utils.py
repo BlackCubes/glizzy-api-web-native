@@ -12,7 +12,7 @@ def random_string_generator(
     return "".join(random.choice(chars) for _ in range(size))
 
 
-def unique_slug_generator(instance, new_slug=None):
+def slug_generator(instance, new_slug=None):
     """
     Returns a unique slug from the model's ``name`` field if the ``slug``
     query exists in the DB, or the newly created ``slug`` that slugifies the
@@ -36,6 +36,6 @@ def unique_slug_generator(instance, new_slug=None):
         # Run this function again to check if the uniquely random slug is
         # truly unique in the DB. If it is unique, return the unique slug.
         # Otherwise, generate another unique slug.
-        return unique_slug_generator(instance, new_slug=unique_slug)
+        return slug_generator(instance, new_slug=unique_slug)
 
     return slug
