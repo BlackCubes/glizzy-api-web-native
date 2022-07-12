@@ -1,5 +1,7 @@
 from django.db import models
 
+from .utils import upload_glizzy_image_to
+
 
 class Glizzy(models.Model):
     """
@@ -46,7 +48,13 @@ class Glizzy(models.Model):
             "required": "The long info is required.",
         }
     )
-    image = models.ImageField()
+    image = models.ImageField(
+        upload_to=upload_glizzy_image_to,
+        error_messages={
+            "blank": "The image cannot be empty.",
+            "required": "The image is required.",
+        },
+    )
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
