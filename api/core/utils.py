@@ -43,6 +43,9 @@ def slug_generator(instance, new_slug=None):
 
 
 def error_404(request, exception):
+    """
+    Custom 404 error response for Django REST Framework.
+    """
     response = JsonResponse(
         data={
             "status_code": 404,
@@ -55,6 +58,9 @@ def error_404(request, exception):
 
 
 def error_500(request):
+    """
+    Custom 500 error response for Django REST Framework.
+    """
     response = JsonResponse(
         data={
             "status_code": 500,
@@ -67,6 +73,16 @@ def error_500(request):
 
 
 def final_success_response(request, response):
+    """
+    Custom success response (if no errors i.e. the exception) to change the
+    JSON output to have ``status_code``, ``status``, and ``data``.
+
+    If there is pagination, then its ``meta_data`` is put on the same level as
+    ``status_code``, ``status``, and ``data``.
+
+    All of this is done to give a better, clearer, and cleaner JSON output for
+    the developers/users.
+    """
     if not response.exception:
         response.data = {
             "status_code": response.status_code,
