@@ -24,6 +24,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    "glizzy",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
