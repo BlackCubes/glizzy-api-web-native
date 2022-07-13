@@ -6,10 +6,10 @@ from .serializers import GlizzySerializer
 from core.mixins import MultipleFieldLookupMixin
 
 
-class RetrieveGlizzyView(MultipleFieldLookupMixin, generics.RetrieveAPIView):
+class GlizzyDetailView(MultipleFieldLookupMixin, generics.RetrieveAPIView):
     """
-    A generic view that retrieves all objects from the Glizzy model, or finds
-    a particular object given either a ``pk``  or ``slug`` from the URL.
+    A generic view that finds a particular object given either a ``pk`` or
+    ``slug`` from the URL, if it exists.
 
     NOTE: Only a GET request.
     """
