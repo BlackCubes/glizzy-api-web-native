@@ -117,7 +117,7 @@ STATICFILES_DIRS = [
 # JavaScript/CSS assets being served from cache.
 # See https://docs.djangoproject.com/en/4.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
 STATICFILES_STORAGE = (
-    "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+    "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
