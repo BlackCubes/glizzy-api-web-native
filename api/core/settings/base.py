@@ -47,7 +47,9 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": "core.pagination.CustomPageNumberPagination"
+    "EXCEPTION_HANDLER": "core.exceptions.custom_exception_handler",
+    "NON_FIELD_ERRORS_KEY": "error",
+    "DEFAULT_PAGINATION_CLASS": "core.pagination.CustomPageNumberPagination",
 }
 
 ROOT_URLCONF = "core.urls"
