@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from rest_framework.exceptions import NotFound
 
 
 class MultipleFieldLookupMixin:
@@ -21,7 +21,12 @@ class MultipleFieldLookupMixin:
             if self.kwargs.get(field, None):
                 field_filter[field] = self.kwargs[field]
 
-        obj = get_object_or_404(queryset, **field_filter)
+        try:
+            obj = queryset.get(**field_filter)
+        except queryset.model.DoesNotExist:
+            model_name = queryset.model.__name__
+
+            raise NotFound(f"The {model_name.lower()} does not exist.")
 
         self.check_object_permissions(self.request, obj)
 
