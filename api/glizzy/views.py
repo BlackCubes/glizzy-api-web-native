@@ -15,7 +15,7 @@ class GlizzyListView(generics.ListAPIView):
     """
 
     permission_classes = (permissions.AllowAny,)
-    queryset = Glizzy.objects.all()
+    queryset = Glizzy.objects.all().order_by("name")
     serializer_class = GlizzySerializer
 
     def finalize_response(self, request, response, *args, **kwargs):
@@ -33,7 +33,7 @@ class GlizzyDetailView(MultipleFieldLookupMixin, generics.RetrieveAPIView):
     """
 
     permission_classes = (permissions.AllowAny,)
-    queryset = Glizzy.objects.all()
+    queryset = Glizzy.objects.all().order_by("name")
     serializer_class = GlizzySerializer
     lookup_fields = (
         "pk",
