@@ -25,6 +25,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     "glizzy",
+    "corsheaders",
+    "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -34,6 +36,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -42,6 +45,12 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+REST_FRAMEWORK = {
+    "EXCEPTION_HANDLER": "core.exceptions.custom_exception_handler",
+    "NON_FIELD_ERRORS_KEY": "error",
+    "DEFAULT_PAGINATION_CLASS": "core.pagination.CustomPageNumberPagination",
+}
 
 ROOT_URLCONF = "core.urls"
 
@@ -108,7 +117,7 @@ STATICFILES_DIRS = [
 # JavaScript/CSS assets being served from cache.
 # See https://docs.djangoproject.com/en/4.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
 STATICFILES_STORAGE = (
-    "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+    "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
