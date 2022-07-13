@@ -18,7 +18,7 @@ class MultipleFieldLookupMixin:
         field_filter = {}
 
         for field in self.lookup_fields:
-            if self.kwargs[field]:
+            if self.kwargs.get(field, None):
                 field_filter[field] = self.kwargs[field]
 
         obj = get_object_or_404(queryset, **field_filter)
