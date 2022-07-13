@@ -4,6 +4,7 @@ from .models import Glizzy
 from .serializers import GlizzySerializer
 
 from core.mixins import MultipleFieldLookupMixin
+from core.utils import final_success_response
 
 
 class GlizzyListView(generics.ListAPIView):
@@ -16,6 +17,11 @@ class GlizzyListView(generics.ListAPIView):
     permission_classes = (permissions.AllowAny,)
     queryset = Glizzy.objects.all()
     serializer_class = GlizzySerializer
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        final_success_response(request, response)
+
+        return super().finalize_response(request, response, *args, **kwargs)
 
 
 class GlizzyDetailView(MultipleFieldLookupMixin, generics.RetrieveAPIView):
@@ -33,3 +39,8 @@ class GlizzyDetailView(MultipleFieldLookupMixin, generics.RetrieveAPIView):
         "pk",
         "slug",
     )
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        final_success_response(request, response)
+
+        return super().finalize_response(request, response, *args, **kwargs)
