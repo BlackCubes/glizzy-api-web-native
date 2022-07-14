@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
+from .forms import GlizzyForm
 from .models import Glizzy
 
 
@@ -10,6 +11,7 @@ class GlizzyAdmin(admin.ModelAdmin):
     """
 
     model = Glizzy
+    form = GlizzyForm
 
     # Viewing all glizzys
     list_display = (
