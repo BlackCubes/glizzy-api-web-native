@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from .forms import EmojiForm
 from .models import Emoji
 
 
@@ -9,6 +10,7 @@ class EmojiAdmin(admin.ModelAdmin):
     """
 
     model = Emoji
+    form = EmojiForm
 
     # Viewing all emojis
     list_display = (
