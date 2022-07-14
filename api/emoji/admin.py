@@ -70,11 +70,10 @@ class EmojiAdmin(admin.ModelAdmin):
         (
             None,
             {
-                "fieldset",
-                (
+                "fields": (
                     "emoji",
                     "name",
-                ),
+                )
             },
         ),
     )
