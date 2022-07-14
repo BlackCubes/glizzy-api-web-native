@@ -1,6 +1,8 @@
 from django.db import models
 from uuid import uuid4
 
+from .utils import model_error_messages
+
 
 class Emoji(models.Model):
     """
@@ -17,10 +19,26 @@ class Emoji(models.Model):
     when the model is changed.
     """
 
-    uuid = models.UUIDField(unique=True, default=uuid4, editable=False)
-    emoji = models.CharField(max_length=1, unique=True)
-    name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100, null=True, blank=True)
+    uuid = models.UUIDField(
+        unique=True,
+        default=uuid4,
+        editable=False,
+        error_messages=model_error_messages["uuid"],
+    )
+    emoji = models.CharField(
+        max_length=1, unique=True, error_messages=model_error_messages["emoji"]
+    )
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+        error_messages=model_error_messages["name"],
+    )
+    slug = models.SlugField(
+        max_length=100,
+        null=True,
+        blank=True,
+        error_messages=model_error_messages["slug"],
+    )
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
