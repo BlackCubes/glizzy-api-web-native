@@ -1,6 +1,6 @@
 from django.db import models
 
-from .utils import upload_glizzy_image_to
+from .utils import model_error_messages, upload_glizzy_image_to
 
 
 class Glizzy(models.Model):
@@ -19,41 +19,24 @@ class Glizzy(models.Model):
     name = models.CharField(
         max_length=100,
         unique=True,
-        error_messages={
-            "blank": "The name cannot be empty.",
-            "max_length": "The name should be no more than 100 characters.",
-            "required": "The name is required.",
-            "unique": "The name already exists.",
-        },
+        error_messages=model_error_messages["name"],
     )
     slug = models.SlugField(
         max_length=100,
         null=True,
         blank=True,
-        error_messages={
-            "max_length": "The slug should be no more than 100 characters.",
-        },
+        error_messages=model_error_messages["slug"],
     )
     short_info = models.CharField(
         max_length=200,
-        error_messages={
-            "blank": "The short info cannot be empty.",
-            "max_length": "The short info should be no more than 200 characters.",
-            "required": "The short info is required.",
-        },
+        error_messages=model_error_messages["short_info"],
     )
     long_info = models.TextField(
-        error_messages={
-            "blank": "The long info cannot be empty.",
-            "required": "The long info is required.",
-        }
+        error_messages=model_error_messages["long_info"]
     )
     image = models.ImageField(
         upload_to=upload_glizzy_image_to,
-        error_messages={
-            "blank": "The image cannot be empty.",
-            "required": "The image is required.",
-        },
+        error_messages=model_error_messages["image"],
     )
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
