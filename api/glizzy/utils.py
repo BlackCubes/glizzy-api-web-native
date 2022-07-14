@@ -15,6 +15,7 @@ def upload_glizzy_image_to(instance, filename):
 
 # To keep things DRY
 model_error_messages = {
+    "uuid": {"unique": "The uuid is not unique."},
     "name": {
         "blank": "The name cannot be empty.",
         "max_length": "The name should be no more than 100 characters.",

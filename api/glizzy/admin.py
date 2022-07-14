@@ -45,6 +45,7 @@ class GlizzyAdmin(admin.ModelAdmin):
             "Additional Info",
             {
                 "fields": (
+                    "uuid",
                     "slug",
                     "created_at",
                     "updated_at",
@@ -53,6 +54,7 @@ class GlizzyAdmin(admin.ModelAdmin):
         ),
     )
     readonly_fields = (
+        "uuid",
         "slug",
         "created_at",
         "updated_at",
