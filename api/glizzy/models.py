@@ -1,4 +1,5 @@
 from django.db import models
+from uuid import uuid4
 
 from .utils import model_error_messages, upload_glizzy_image_to
 
@@ -16,6 +17,12 @@ class Glizzy(models.Model):
     model is changed.
     """
 
+    uuid = models.UUIDField(
+        unique=True,
+        default=uuid4,
+        editable=False,
+        error_messages=model_error_messages["uuid"],
+    )
     name = models.CharField(
         max_length=100,
         unique=True,
