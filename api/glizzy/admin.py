@@ -73,7 +73,7 @@ class GlizzyAdmin(admin.ModelAdmin):
         ),
     )
 
-    # To display the ``add_fieldset`` on the creation page.
+    # To display the ``add_fieldset`` on the creation page
     def get_fieldsets(self, request, obj=None):
         if not obj:
             return self.add_fieldset
