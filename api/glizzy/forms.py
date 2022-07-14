@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import Glizzy
+from .utils import model_error_messages
 
 
 class GlizzyForm(forms.ModelForm):
@@ -48,23 +49,8 @@ class GlizzyForm(forms.ModelForm):
         }
 
         error_messages = {
-            "name": {
-                "blank": "The name cannot be empty.",
-                "max_length": "The name should be no more than 100 characters.",
-                "required": "The name is required.",
-                "unique": "The name already exists.",
-            },
-            "short_info": {
-                "blank": "The short info cannot be empty.",
-                "max_length": "The short info should be no more than 200 characters.",
-                "required": "The short info is required.",
-            },
-            "long_info": {
-                "blank": "The long info cannot be empty.",
-                "required": "The long info is required.",
-            },
-            "image": {
-                "blank": "The image cannot be empty.",
-                "required": "The image is required.",
-            },
+            "name": model_error_messages["name"],
+            "short_info": model_error_messages["short_info"],
+            "long_info": model_error_messages["long_info"],
+            "image": model_error_messages["image"],
         }
