@@ -17,6 +17,13 @@ class EmojiForm(forms.ModelForm):
     ``emoji``.
     """
 
+    emoji = forms.CharField(
+        max_length=2,
+        label="*Emoji",
+        widget=forms.TextInput(attrs={"placeholder": "🌭"}),
+        error_messages=model_error_messages["emoji"],
+    )
+
     class Meta:
         model = Emoji
 
@@ -25,16 +32,12 @@ class EmojiForm(forms.ModelForm):
             "emoji",
         )
 
-        labels = {"name": "*Name", "emoji": "*Emoji"}
+        labels = {"name": "*Name"}
 
         widgets = {
             "name": forms.TextInput(
                 attrs={"placeholder": "A lit name for the emoji"}
-            ),
-            "emoji": forms.TextInput(attrs={"placeholder": "🌭"}),
+            )
         }
 
-        error_messages = {
-            "name": model_error_messages["name"],
-            "emoji": model_error_messages["emoji"],
-        }
+        error_messages = {"name": model_error_messages["name"]}
