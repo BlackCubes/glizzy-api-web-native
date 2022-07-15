@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 
+from .forms import ReactionForm
 from .models import Reaction
 
 
@@ -11,6 +12,7 @@ class ReactionAdmin(admin.ModelAdmin):
     """
 
     model = Reaction
+    form = ReactionForm
 
     # Viewing all reactions
     list_display = (
