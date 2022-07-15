@@ -26,6 +26,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     "emoji",
     "glizzy",
+    "reaction",
     "corsheaders",
     "rest_framework",
     "django.contrib.admin",
