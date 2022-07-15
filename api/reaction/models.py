@@ -1,6 +1,8 @@
 from django.db import models
 from uuid import uuid4
 
+from .utils import model_error_messages
+
 
 class Reaction(models.Model):
     """
@@ -19,13 +21,26 @@ class Reaction(models.Model):
     when the model is changed.
     """
 
-    uuid = models.UUIDField(unique=True, default=uuid4, editable=False)
-    reaction_count = models.IntegerField(default=0)
+    uuid = models.UUIDField(
+        unique=True,
+        default=uuid4,
+        editable=False,
+        error_messages=model_error_messages["uuid"],
+    )
+    reaction_count = models.IntegerField(
+        default=0, error_messages=model_error_messages["reaction_count"]
+    )
     emoji = models.ForeignKey(
-        "emoji.Emoji", related_name="reactions", on_delete=models.CASCADE
+        "emoji.Emoji",
+        related_name="reactions",
+        on_delete=models.CASCADE,
+        error_messages=model_error_messages["emoji"],
     )
     glizzy = models.ForeignKey(
-        "glizzy.Glizzy", related_name="reactions", on_delete=models.CASCADE
+        "glizzy.Glizzy",
+        related_name="reactions",
+        on_delete=models.CASCADE,
+        error_messages=model_error_messages["glizzy"],
     )
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
