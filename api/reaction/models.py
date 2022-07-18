@@ -1,3 +1,4 @@
+from django.core import validators
 from django.db import models
 from uuid import uuid4
 
@@ -28,7 +29,9 @@ class Reaction(models.Model):
         error_messages=model_error_messages["uuid"],
     )
     reaction_count = models.IntegerField(
-        default=0, error_messages=model_error_messages["reaction_count"]
+        default=0,
+        validators=[validators.MinValueValidator(limit_value=0)],
+        error_messages=model_error_messages["reaction_count"],
     )
     emoji = models.ForeignKey(
         "emoji.Emoji",
