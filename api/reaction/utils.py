@@ -4,6 +4,7 @@ model_error_messages = {
     "reaction_count": {
         "blank": "The reaction count cannot be empty.",
         "invalid": "The reaction count needs to be a valid integer.",
+        "min_value": "The reaction count should be 0 or greater.",
         "required": "The reaction count is required.",
     },
     "emoji": {
