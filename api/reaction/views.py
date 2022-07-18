@@ -6,9 +6,9 @@ from .serializers import ReactionSerializer
 from core.utils import final_success_response
 
 
-class ReactionListCreateView(generics.ListCreateAPIView):
+class ReactionCreateView(generics.CreateAPIView):
     """
-    A generic view that finds all objects from the Reaction model.
+    A generic view that creates a new object in the Reaction model.
 
     NOTE: Only a GET and POST request.
     """

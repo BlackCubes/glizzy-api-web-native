@@ -4,5 +4,5 @@ from . import views
 
 
 urlpatterns = [
-    path("", views.ReactionListCreateView.as_view(), name="list-create"),
+    path("", views.ReactionCreateView.as_view(), name="create"),
 ]
