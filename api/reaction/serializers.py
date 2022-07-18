@@ -23,7 +23,7 @@ class ReactionSerializer(serializers.ModelSerializer):
         error_messages=model_error_messages["emoji"],
     )
     glizzy = serializers.SlugRelatedField(
-        slug_field="slug",
+        slug_field="name",
         queryset=Glizzy.objects.all(),
         error_messages=model_error_messages["glizzy"],
     )
@@ -50,7 +50,7 @@ class ReactionSerializer(serializers.ModelSerializer):
         if incoming_emoji is not None and incoming_glizzy is not None:
             try:
                 update_reaction = Reaction.objects.get(
-                    emoji__emoji=incoming_emoji, glizzy__slug=incoming_glizzy
+                    emoji__emoji=incoming_emoji, glizzy__name=incoming_glizzy
                 )
             except Reaction.DoesNotExist:
                 pass
