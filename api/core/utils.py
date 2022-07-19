@@ -48,7 +48,7 @@ def error_404(request, exception):
     """
     response = JsonResponse(
         data={
-            "status_code": 404,
+            "statusCode": 404,
             "status": "fail",
             "message": "The requested URL was not found.",
         }
@@ -63,7 +63,7 @@ def error_500(request):
     """
     response = JsonResponse(
         data={
-            "status_code": 500,
+            "statusCode": 500,
             "status": "error",
             "message": "Sorry, a technical error has occured.",
         }
@@ -75,27 +75,27 @@ def error_500(request):
 def final_success_response(request, response):
     """
     Custom success response (if no errors i.e. the exception) to change the
-    JSON output to have ``status_code``, ``status``, and ``data``.
+    JSON output to have ``statusCode``, ``status``, and ``data``.
 
-    If there is pagination, then its ``meta_data`` is put on the same level as
-    ``status_code``, ``status``, and ``data``.
+    If there is pagination, then its ``metaData`` is put on the same level as
+    ``statusCode``, ``status``, and ``data``.
 
     All of this is done to give a better, clearer, and cleaner JSON output for
     the developers/users.
     """
     if not response.exception:
         response.data = {
-            "status_code": response.status_code,
+            "statusCode": response.status_code,
             "status": "success",
             "data": response.data,
         }
 
         if (
             "results" in response.data["data"]
-            and "meta_data" in response.data["data"]
+            and "metaData" in response.data["data"]
         ):
             pagination_data = response.data["data"].pop("results")
-            pagination_meta_data = response.data["data"].pop("meta_data")
+            pagination_meta_data = response.data["data"].pop("metaData")
 
             response.data["data"] = pagination_data
-            response.data["meta_data"] = pagination_meta_data
+            response.data["metaData"] = pagination_meta_data

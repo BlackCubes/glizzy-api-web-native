@@ -23,3 +23,14 @@ class EmojiSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         )
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        representation["createdAt"] = representation["created_at"]
+        representation["updatedAt"] = representation["updated_at"]
+
+        representation.pop("created_at")
+        representation.pop("updated_at")
+
+        return representation

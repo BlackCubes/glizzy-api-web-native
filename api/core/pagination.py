@@ -8,8 +8,8 @@ class CustomPageNumberPagination(pagination.PageNumberPagination):
     A custom ``PageNumberPagination`` to be used for all API apps with a list
     of data.
 
-    If there is a list of data, the ``meta_data`` key would be inserted to the
-    JSON output that is an object with keys of ``total_count`` (total count of
+    If there is a list of data, the ``metaData`` key would be inserted to the
+    JSON output that is an object with keys of ``totalCount`` (total count of
     the list of data for all pages), ``next`` (a hyperlink for the next
     result, or ``None``), and ``previous`` (a hyperlink for the previous
     result, or ``None``. ``None`` for the initial start).
@@ -31,10 +31,10 @@ class CustomPageNumberPagination(pagination.PageNumberPagination):
                 [
                     ("results", data),
                     (
-                        "meta_data",
+                        "metaData",
                         OrderedDict(
                             [
-                                ("total_count", self.page.paginator.count),
+                                ("totalCount", self.page.paginator.count),
                                 ("next", self.get_next_link()),
                                 ("previous", self.get_previous_link()),
                             ]

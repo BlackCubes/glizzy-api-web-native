@@ -70,3 +70,16 @@ class ReactionSerializer(serializers.ModelSerializer):
         new_reaction = Reaction.objects.create(**validated_data)
 
         return new_reaction
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        representation["reactionCount"] = representation["reaction_count"]
+        representation["createdAt"] = representation["created_at"]
+        representation["updatedAt"] = representation["updated_at"]
+
+        representation.pop("reaction_count")
+        representation.pop("created_at")
+        representation.pop("updated_at")
+
+        return representation

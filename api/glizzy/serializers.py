@@ -35,10 +35,20 @@ class GlizzySerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
 
+        representation["shortInfo"] = representation["short_info"]
+        representation["longInfo"] = representation["long_info"]
+        representation["createdAt"] = representation["created_at"]
+        representation["updatedAt"] = representation["updated_at"]
+
+        representation.pop("short_info")
+        representation.pop("long_info")
+        representation.pop("created_at")
+        representation.pop("updated_at")
+
         if representation.get("reactions", None):
             for reaction in representation["reactions"]:
                 reaction.pop("glizzy")
-                reaction.pop("created_at")
-                reaction.pop("updated_at")
+                reaction.pop("createdAt")
+                reaction.pop("updatedAt")
 
         return representation
