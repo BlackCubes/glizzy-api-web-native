@@ -14,6 +14,10 @@ class ReactionSerializer(serializers.ModelSerializer):
     given serializer fields of ``id``, ``uuid``, ``reaction_count``,
     ``emoji``, ``glizzy``, ``created_at``, and ``updated_at``.
 
+    On the ``create()`` method, it checks on two cases: If the object exists,
+    then it increments the ``reaction_count``. Otherwise, if the object does
+    not exist, then it creates a new one.
+
     NOTE: All Django models have an ``id`` field by defailt upon creation.
     """
 
