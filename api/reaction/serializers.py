@@ -47,7 +47,7 @@ class ReactionSerializer(serializers.ModelSerializer):
         incoming_emoji = self.initial_data.get("emoji", None)
         incoming_glizzy = self.initial_data.get("glizzy", None)
 
-        if incoming_emoji is not None and incoming_glizzy is not None:
+        if incoming_emoji and incoming_glizzy:
             try:
                 update_reaction = Reaction.objects.get(
                     emoji__emoji=incoming_emoji, glizzy__name=incoming_glizzy
