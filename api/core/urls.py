@@ -22,6 +22,7 @@ urlpatterns = [
     # Rest APIs
     path("api/v1/emojis/", include("emoji.urls")),
     path("api/v1/glizzys/", include("glizzy.urls")),
+    path("api/v1/reactions/", include("reaction.urls")),
 ]
 
 

@@ -18,20 +18,29 @@ model_error_messages = {
     "uuid": {"unique": "The uuid is not unique."},
     "name": {
         "blank": "The name cannot be empty.",
+        "invalid": "Invalid value for the name.",
         "max_length": "The name should be no more than 100 characters.",
+        "null": "The name cannot be empty.",
         "required": "The name is required.",
         "unique": "The name already exists.",
     },
     "slug": {
+        "does_not_exist": "The slug does not exist.",
+        "invalid": "Invalid value for the slug.",
         "max_length": "The slug should be no more than 100 characters.",
+        "null": "The slug cannot be empty.",
     },
     "short_info": {
         "blank": "The short info cannot be empty.",
+        "invalid": "Invalid value for the short info.",
         "max_length": "The short info should be no more than 200 characters.",
+        "null": "The short info cannot be empty.",
         "required": "The short info is required.",
     },
     "long_info": {
         "blank": "The long info cannot be empty.",
+        "invalid": "Invalid value for the long info.",
+        "null": "The long info cannot be empty.",
         "required": "The long info is required.",
     },
     "image": {
