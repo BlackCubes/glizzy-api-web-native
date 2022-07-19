@@ -31,10 +31,10 @@ class CustomPageNumberPagination(pagination.PageNumberPagination):
                 [
                     ("results", data),
                     (
-                        "meta_data",
+                        "metaData",
                         OrderedDict(
                             [
-                                ("total_count", self.page.paginator.count),
+                                ("totalCount", self.page.paginator.count),
                                 ("next", self.get_next_link()),
                                 ("previous", self.get_previous_link()),
                             ]
