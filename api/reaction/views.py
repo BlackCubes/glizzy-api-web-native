@@ -10,7 +10,7 @@ class ReactionCreateView(generics.CreateAPIView):
     """
     A generic view that creates a new object in the Reaction model.
 
-    NOTE: Only a GET and POST request.
+    NOTE: Only a POST request.
     """
 
     permission_classes = (permissions.AllowAny,)
