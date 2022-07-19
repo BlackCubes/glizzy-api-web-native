@@ -75,10 +75,10 @@ def error_500(request):
 def final_success_response(request, response):
     """
     Custom success response (if no errors i.e. the exception) to change the
-    JSON output to have ``status_code``, ``status``, and ``data``.
+    JSON output to have ``statusCode``, ``status``, and ``data``.
 
-    If there is pagination, then its ``meta_data`` is put on the same level as
-    ``status_code``, ``status``, and ``data``.
+    If there is pagination, then its ``metaData`` is put on the same level as
+    ``statusCode``, ``status``, and ``data``.
 
     All of this is done to give a better, clearer, and cleaner JSON output for
     the developers/users.
