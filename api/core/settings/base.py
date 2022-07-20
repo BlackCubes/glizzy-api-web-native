@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "glizzy",
     "reaction",
     "corsheaders",
+    "graphene_django",
     "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
