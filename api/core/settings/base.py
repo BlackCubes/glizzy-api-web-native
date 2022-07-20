@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "reaction",
     "corsheaders",
     "rest_framework",
+    "strawberry.django",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
