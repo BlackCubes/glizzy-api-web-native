@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+from strawberry.django.views import GraphQLView
+
+from .graphql_config import schema
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -23,6 +26,10 @@ urlpatterns = [
     path("api/v1/emojis/", include("emoji.urls")),
     path("api/v1/glizzys/", include("glizzy.urls")),
     path("api/v1/reactions/", include("reaction.urls")),
+    # GraphQL
+    path(
+        "graphql/", GraphQLView.as_view(schema=schema, graphiql=settings.DEBUG)
+    ),
 ]
 
 

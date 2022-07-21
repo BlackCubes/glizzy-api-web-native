@@ -23,7 +23,9 @@
     "--follow-imports=silent",
     "--ignore-missing-imports",
     "--show-column-numbers",
-    "--no-pretty"
+    "--no-pretty",
+    "--load-plugins",
+    "strawberry.ext.mypy_plugin"
   ],
   "python.linting.mypyCategorySeverity.error": "Error",
   "python.linting.mypyCategorySeverity.note": "Information",
