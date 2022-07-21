@@ -5,17 +5,15 @@ import uuid
 
 
 @strawberry.type
-class Glizzy:
+class Emoji:
     """
-    A GraphQL type representing the Glizzy model.
+    A GraphQL type representing the Emoji model.
     """
 
     id: strawberry.ID
     uuid: uuid.UUID
+    emoji: str
     name: str
-    short_info: str
-    long_info: str
     slug: typing.Optional[str] = None
-    image: typing.Optional[str] = None
     created_at: typing.Optional[datetime.datetime] = None
     updated_at: typing.Optional[datetime.datetime] = None
