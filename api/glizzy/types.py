@@ -4,7 +4,7 @@ import typing
 import uuid
 
 
-@strawberry.type()
+@strawberry.type
 class Glizzy:
     """
     A GraphQL type representing the Glizzy model.
