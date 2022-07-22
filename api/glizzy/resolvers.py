@@ -75,8 +75,8 @@ def get_glizzy(
             "long_info": glizzy.long_info,
             "slug": glizzy.slug,
             "image": glizzy.image,
-            "reactions": glizzy.reactions.all()
-            .select_related("emoji")
+            "reactions": glizzy.reactions.select_related("emoji")
+            .all()
             .order_by("reaction_count"),
             "created_at": glizzy.created_at,
             "updated_at": glizzy.updated_at,
