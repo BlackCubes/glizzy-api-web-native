@@ -3,6 +3,8 @@ import typing
 
 from . import models, types
 
+from core.utils import DictionaryToClass
+
 
 def get_glizzys(info: strawberry.types.Info) -> typing.List[types.Glizzy]:
     """
@@ -60,6 +62,35 @@ def get_glizzy(
         info.context.request.build_absolute_uri(glizzy.image.url)
         if glizzy.image
         else None
+    )
+
+    glizzy = DictionaryToClass(
+        {
+            "id": glizzy.id,
+            "uuid": glizzy.uuid,
+            "name": glizzy.name,
+            "short_info": glizzy.short_info,
+            "long_info": glizzy.long_info,
+            "slug": glizzy.slug,
+            "image": glizzy.image,
+            "reactions": [
+                DictionaryToClass(
+                    {
+                        "id": reaction.id,
+                        "uuid": reaction.uuid,
+                        "reaction_count": reaction.reaction_count,
+                        "emoji": reaction.emoji.emoji,
+                        "created_at": reaction.created_at,
+                        "updated_at": reaction.updated_at,
+                    }
+                )
+                for reaction in glizzy.reactions.all().order_by(
+                    "reaction_count"
+                )
+            ],
+            "created_at": glizzy.created_at,
+            "updated_at": glizzy.updated_at,
+        }
     )
 
     return glizzy
