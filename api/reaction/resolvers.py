@@ -1,6 +1,8 @@
 from . import models, types
 from .utils import model_error_messages
 
+from core.utils import DictionaryToClass
+
 import emoji.models as emoji_models
 
 import glizzy.models as glizzy_models
@@ -32,10 +34,39 @@ def add_reaction(
 
         update_reaction.save()
 
+        # This is done so that the ``emoji`` from the Emoji model and the
+        # ``name`` from the Glizzy model could be outputted instead of the
+        # foreign key instance.
+        update_reaction = DictionaryToClass(
+            {
+                "id": update_reaction.id,
+                "uuid": update_reaction.uuid,
+                "reaction_count": update_reaction.reaction_count,
+                "emoji": emoji,
+                "glizzy": glizzy,
+                "created_at": update_reaction.created_at,
+                "updated_at": update_reaction.updated_at,
+            }
+        )
+
         return update_reaction
 
     new_reaction: models.Reaction = models.Reaction.objects.create(
         emoji=emoji, glizzy=glizzy, reaction_count=reaction_count
+    )
+
+    # So that the ``emoji`` and ``glizzy`` could be shown instead of its
+    # foreign key instance.
+    new_reaction = DictionaryToClass(
+        {
+            "id": new_reaction.id,
+            "uuid": new_reaction.uuid,
+            "reaction_count": new_reaction.reaction_count,
+            "emoji": emoji,
+            "glizzy": glizzy,
+            "created_at": new_reaction.created_at,
+            "updated_at": new_reaction.updated_at,
+        }
     )
 
     return new_reaction
