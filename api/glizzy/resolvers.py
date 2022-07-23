@@ -3,6 +3,8 @@ import typing
 
 from . import models, types
 
+from core.utils import DictionaryToClass
+
 
 def get_glizzys(info: strawberry.types.Info) -> typing.List[types.Glizzy]:
     """
@@ -13,13 +15,35 @@ def get_glizzys(info: strawberry.types.Info) -> typing.List[types.Glizzy]:
         "name"
     )
 
-    if len(glizzys):
-        for glizzy in glizzys:
-            glizzy.image = (
-                info.context.request.build_absolute_uri(glizzy.image.url)
+    # In order to output the reactions. This works since it creates a new
+    # ``glizzys`` reference because of the ``DictionaryToClass``. Without it,
+    # ``glizzy.reactions`` would always point to its ``RelatedManager`` making
+    # it not an iterable queryset.
+    # Example: ``glizzy.reactions`` -> related manager.
+    # But, making it an iterable queryset: ``glizzy.reactions.all()``.
+    glizzys = [
+        DictionaryToClass(
+            {
+                "id": glizzy.id,
+                "uuid": glizzy.uuid,
+                "name": glizzy.name,
+                "short_info": glizzy.short_info,
+                "long_info": glizzy.long_info,
+                "slug": glizzy.slug,
+                "image": info.context.request.build_absolute_uri(
+                    glizzy.image.url
+                )
                 if glizzy.image
-                else None
-            )
+                else None,
+                "reactions": glizzy.reactions.select_related("emoji")
+                .all()
+                .order_by("reaction_count"),
+                "created_at": glizzy.created_at,
+                "updated_at": glizzy.updated_at,
+            }
+        )
+        for glizzy in glizzys
+    ]
 
     return glizzys
 
@@ -52,7 +76,9 @@ def get_glizzy(
         field_filter["slug"] = slug
 
     try:
-        glizzy: models.Glizzy = models.Glizzy.objects.get(**field_filter)
+        glizzy: models.Glizzy = models.Glizzy.objects.prefetch_related(
+            "reactions"
+        ).get(**field_filter)
     except models.Glizzy.DoesNotExist:
         raise Exception("The glizzy does not exist.")
 
@@ -60,6 +86,25 @@ def get_glizzy(
         info.context.request.build_absolute_uri(glizzy.image.url)
         if glizzy.image
         else None
+    )
+
+    # In order to output the reactions. See the huge comment section above for
+    # an explanation.
+    glizzy = DictionaryToClass(
+        {
+            "id": glizzy.id,
+            "uuid": glizzy.uuid,
+            "name": glizzy.name,
+            "short_info": glizzy.short_info,
+            "long_info": glizzy.long_info,
+            "slug": glizzy.slug,
+            "image": glizzy.image,
+            "reactions": glizzy.reactions.select_related("emoji")
+            .all()
+            .order_by("reaction_count"),
+            "created_at": glizzy.created_at,
+            "updated_at": glizzy.updated_at,
+        }
     )
 
     return glizzy

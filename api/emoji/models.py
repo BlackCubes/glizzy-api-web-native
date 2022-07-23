@@ -43,7 +43,7 @@ class Emoji(models.Model):
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.emoji} ({self.name})"
+        return self.emoji
 
     class Meta:
         verbose_name = "Emoji"

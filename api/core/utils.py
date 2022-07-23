@@ -99,3 +99,24 @@ def final_success_response(request, response):
 
             response.data["data"] = pagination_data
             response.data["metaData"] = pagination_meta_data
+
+
+class DictionaryToClass(object):
+    """
+    A simple class to convert a dictionary into a class. Makes each ``keys``
+    into attributes.
+    """
+
+    def __init__(self, dictionary: dict[str, any]) -> None:
+        if not isinstance(dictionary, dict):
+            raise Exception(
+                "Needs to be a dictionary of type '<class 'dict'>'."
+            )
+
+        if not dictionary:
+            raise Exception(
+                "A dictionary cannot be empty. Needs to be of type 'dict[str, any]'."
+            )
+
+        for key in dictionary:
+            setattr(self, key, dictionary[key])
