@@ -34,8 +34,21 @@ def add_reaction(
 
         return update_reaction
 
+    # Find the model instances and save it to the database
+    try:
+        emoji_instance = emoji_models.Emoji.objects.get(emoji=emoji)
+    except emoji_models.Emoji.DoesNotExist:
+        raise Exception(model_error_messages["emoji"]["does_not_exist"])
+
+    try:
+        glizzy_instance = glizzy_models.Glizzy.objects.get(name=glizzy)
+    except glizzy_models.Glizzy.DoesNotExist:
+        raise Exception(model_error_messages["glizzy"]["does_not_exist"])
+
     new_reaction: models.Reaction = models.Reaction.objects.create(
-        emoji=emoji, glizzy=glizzy, reaction_count=reaction_count
+        emoji=emoji_instance,
+        glizzy=glizzy_instance,
+        reaction_count=reaction_count,
     )
 
     return new_reaction
@@ -56,14 +69,3 @@ def validate_add_reaction(emoji: str, glizzy: str, reaction_count: int):
 
     if not glizzy:
         raise Exception(model_error_messages["glizzy"]["blank"])
-
-    # Check if the models exist
-    try:
-        emoji_models.Emoji.objects.get(emoji=emoji)
-    except emoji_models.Emoji.DoesNotExist:
-        raise Exception(model_error_messages["emoji"]["does_not_exist"])
-
-    try:
-        glizzy_models.Glizzy.objects.get(name=glizzy)
-    except glizzy_models.Glizzy.DoesNotExist:
-        raise Exception(model_error_messages["glizzy"]["does_not_exist"])
