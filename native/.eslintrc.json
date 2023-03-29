@@ -3,7 +3,12 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "airbnb", "airbnb-typescript"],
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb",
+    "airbnb-typescript"
+  ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -11,9 +16,10 @@
     "sourceType": "module",
     "project": "**/tsconfig.json"
   },
-  "plugins": ["react"],
+  "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     "react/jsx-props-no-spreading": "off"
   }
 }
